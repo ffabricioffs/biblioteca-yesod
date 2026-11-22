@@ -1,0 +1,54 @@
+cabal-version:      2.4
+name:               biblioteca
+version:            0.1.0.0
+synopsis:           Sistema de biblioteca em Yesod (Haskell) + PostgreSQL
+build-type:         Simple
+
+extra-source-files:
+    config/models
+    config/routes
+    templates/*.hamlet
+    templates/*.lucius
+
+executable biblioteca
+    main-is:          Main.hs
+    hs-source-dirs:   app, src
+    other-modules:
+        Application
+        Foundation
+        Handler.Comum
+        Handler.Home
+        Models
+    build-depends:
+        base                 >= 4.16 && < 5
+      , aeson
+      , bytestring
+      , http-conduit
+      , monad-logger
+      , persistent
+      , persistent-postgresql
+      , shakespeare
+      , text
+      , time
+      , yesod
+      , yesod-core
+      , yesod-form
+    default-language: Haskell2010
+    default-extensions:
+        DataKinds
+        DerivingStrategies
+        FlexibleContexts
+        FlexibleInstances
+        GADTs
+        GeneralizedNewtypeDeriving
+        MultiParamTypeClasses
+        OverloadedStrings
+        QuasiQuotes
+        ScopedTypeVariables
+        StandaloneDeriving
+        TemplateHaskell
+        TypeFamilies
+        TypeOperators
+        UndecidableInstances
+        ViewPatterns
+    ghc-options: -Wall -threaded -rtsopts

@@ -1,0 +1,17 @@
+$doctype 5
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>#{pageTitle pc} · Biblioteca
+    ^{pageHead pc}
+  <body>
+    <header>
+      <a .marca href=@{HomeR}>📚 Biblioteca
+      <nav>
+    <main>
+      $maybe msg <- mensagem
+        #{msg}
+      ^{pageBody pc}
+    <footer>
+      Projeto Final · Yesod (Haskell) + PostgreSQL · CEP via ViaCEP

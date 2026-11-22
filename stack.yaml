@@ -1,0 +1,4 @@
+# Snapshot do Stackage com GHC 9.6 e Yesod 1.6
+resolver: lts-22.43
+packages:
+  - .

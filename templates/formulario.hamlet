@@ -1,0 +1,6 @@
+<h1>#{titulo}
+<div .cartao>
+  <form .formulario method=post action=@{acao} enctype=#{enctype}>
+    ^{formWidget}
+    <button type=submit>Salvar
+    <a .botao .secundario href=@{voltar}>Cancelar

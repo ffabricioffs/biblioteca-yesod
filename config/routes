@@ -1,0 +1,11 @@
+-- ============================================================
+-- Rotas da aplicação: URL   NomeDaRota   MétodosHTTP
+-- Para cada rota+método o Yesod exige um handler chamado
+-- <metodo><NomeDaRota>, ex.: getLivrosR, postLivroNovoR.
+-- #LivroId = parâmetro da URL convertido para a chave do banco.
+-- Formulários HTML só enviam GET/POST, por isso editar e excluir
+-- usam POST em rotas próprias (/editar, /excluir).
+-- ============================================================
+
+/                                    HomeR              GET
+
