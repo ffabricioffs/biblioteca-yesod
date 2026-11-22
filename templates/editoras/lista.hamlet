@@ -1,0 +1,19 @@
+<div .topo>
+  <h1>Editoras
+  <a .botao href=@{EditoraNovaR}>+ Nova editora
+$if null editoras
+  <p .vazio>Nenhuma editora cadastrada.
+$else
+  <table>
+    <tr>
+      <th>Nome
+      <th>Cidade
+      <th>Ações
+    $forall Entity eid editora <- editoras
+      <tr>
+        <td>#{editoraNome editora}
+        <td>#{maybe "—" id (editoraCidade editora)}
+        <td .acoes>
+          <a .botao .pequeno href=@{EditoraEditarR eid}>Editar
+          <form method=post action=@{EditoraExcluirR eid} onsubmit="return confirm('Excluir esta editora?')">
+            <button .perigo .pequeno>Excluir

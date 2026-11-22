@@ -9,6 +9,7 @@ extra-source-files:
     config/routes
     templates/*.hamlet
     templates/*.lucius
+    templates/**/*.hamlet
 
 executable biblioteca
     main-is:          Main.hs
@@ -16,7 +17,9 @@ executable biblioteca
     other-modules:
         Application
         Foundation
+        Handler.Categoria
         Handler.Comum
+        Handler.Editora
         Handler.Home
         Models
     build-depends:

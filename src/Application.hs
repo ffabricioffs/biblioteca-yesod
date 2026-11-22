@@ -7,6 +7,8 @@ module Application where
 import Yesod
 
 import Foundation
+import Handler.Categoria
+import Handler.Editora
 import Handler.Home
 
 mkYesodDispatch "App" resourcesApp

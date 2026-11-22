@@ -9,3 +9,13 @@
 
 /                                    HomeR              GET
 
+/categorias                          CategoriasR        GET
+/categorias/nova                     CategoriaNovaR     GET POST
+/categorias/#CategoriaId/editar      CategoriaEditarR   GET POST
+/categorias/#CategoriaId/excluir     CategoriaExcluirR  POST
+
+/editoras                            EditorasR          GET
+/editoras/nova                       EditoraNovaR       GET POST
+/editoras/#EditoraId/editar          EditoraEditarR     GET POST
+/editoras/#EditoraId/excluir         EditoraExcluirR    POST
+

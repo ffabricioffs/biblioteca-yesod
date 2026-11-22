@@ -1,0 +1,19 @@
+<div .topo>
+  <h1>Categorias
+  <a .botao href=@{CategoriaNovaR}>+ Nova categoria
+$if null categorias
+  <p .vazio>Nenhuma categoria cadastrada.
+$else
+  <table>
+    <tr>
+      <th>Nome
+      <th>Descrição
+      <th>Ações
+    $forall Entity cid categoria <- categorias
+      <tr>
+        <td>#{categoriaNome categoria}
+        <td>#{maybe "—" id (categoriaDescricao categoria)}
+        <td .acoes>
+          <a .botao .pequeno href=@{CategoriaEditarR cid}>Editar
+          <form method=post action=@{CategoriaExcluirR cid} onsubmit="return confirm('Excluir esta categoria?')">
+            <button .perigo .pequeno>Excluir
