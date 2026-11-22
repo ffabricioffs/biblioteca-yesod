@@ -1,10 +1,16 @@
 <div .topo>
-  <h1>#{leitorNome leitor}
-  <div .acoes>
-    <a .botao href=@{LeitorEditarR lid}>Editar
+  <div>
+    <h1>#{leitorNome leitor}
+    <p .subtitulo>#{leitorCidade leitor}/#{leitorUf leitor}
+  <div .botoes>
+    <a .botao href=@{EmprestimoNovoR}>Registrar empréstimo
+    <a .botao .secundario href=@{LeitorEditarR lid}>Editar
     <form method=post action=@{LeitorExcluirR lid} onsubmit="return confirm('Excluir este leitor?')">
-      <button .perigo>Excluir
-<div .cartao>
+      <button .acao .perigo>Excluir
+<div .ficha>
+  <p .ficha-cabecalho>
+    <span>Ficha do leitor
+    <span>Carteirinha nº #{toPathPiece lid}
   <dl>
     <dt>E-mail
     <dd>#{leitorEmail leitor}
@@ -13,26 +19,35 @@
     <dt>CEP
     <dd>#{leitorCep leitor}
     <dt>Endereço
-    <dd>#{leitorLogradouro leitor}, #{leitorNumero leitor} – #{leitorBairro leitor}
-    <dt>Cidade/UF
+    <dd>#{leitorLogradouro leitor}, #{leitorNumero leitor}
+    <dt>Bairro
+    <dd>#{leitorBairro leitor}
+    <dt>Cidade
     <dd>#{leitorCidade leitor}/#{leitorUf leitor}
-  <p>
-    <small>Endereço preenchido automaticamente pela API ViaCEP.
-<h2>Empréstimos
-$if null historico
-  <p .vazio>Nenhum empréstimo.
-$else
-  <table>
-    <tr>
-      <th>Livro
-      <th>Empréstimo
-      <th>Previsto
-      <th>Devolução
-    $forall (e, livro) <- historico
-      <tr>
-        <td>#{livroTitulo livro}
-        <td>#{formatarData (emprestimoDataEmprestimo e)}
-        <td>#{formatarData (emprestimoDataPrevista e)}
-        <td>#{maybe "—" formatarData (emprestimoDataDevolucao e)}
-<p>
-  <a href=@{LeitoresR}>← Voltar para leitores
+  <p .nota>Endereço preenchido automaticamente pela API ViaCEP a partir do CEP.
+<section .secao>
+  <h2>Empréstimos
+  $if null historico
+    <p .vazio>Este leitor ainda não pegou nenhum livro.
+  $else
+    <div .tabela>
+      <table>
+        <thead>
+          <tr>
+            <th>Livro
+            <th>Saiu em
+            <th>Volta até
+            <th>Situação
+        <tbody>
+          $forall (e, livro) <- historico
+            $with (texto, classe) <- statusEmprestimo dia e
+              <tr>
+                <td .titulo>
+                  <span .mini-lombada style="background-color: #{corLombada livro}">
+                  #{livroTitulo livro}
+                <td>#{formatarData (emprestimoDataEmprestimo e)}
+                <td>#{formatarData (emprestimoDataPrevista e)}
+                <td>
+                  <span .carimbo class=#{classe}>#{texto}
+<p .voltar>
+  <a href=@{LeitoresR}>Voltar para os leitores

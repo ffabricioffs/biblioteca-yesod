@@ -1,19 +1,25 @@
 <div .topo>
-  <h1>Categorias
-  <a .botao href=@{CategoriaNovaR}>+ Nova categoria
+  <div>
+    <h1>Categorias
+    <p .subtitulo>Assuntos usados para organizar o acervo.
+  <a .botao href=@{CategoriaNovaR}>Cadastrar categoria
 $if null categorias
-  <p .vazio>Nenhuma categoria cadastrada.
+  <p .vazio>Nenhuma categoria cadastrada ainda.
 $else
-  <table>
-    <tr>
-      <th>Nome
-      <th>Descrição
-      <th>Ações
-    $forall Entity cid categoria <- categorias
-      <tr>
-        <td>#{categoriaNome categoria}
-        <td>#{maybe "—" id (categoriaDescricao categoria)}
-        <td .acoes>
-          <a .botao .pequeno href=@{CategoriaEditarR cid}>Editar
-          <form method=post action=@{CategoriaExcluirR cid} onsubmit="return confirm('Excluir esta categoria?')">
-            <button .perigo .pequeno>Excluir
+  <div .tabela>
+    <table>
+      <thead>
+        <tr>
+          <th>Nome
+          <th>Descrição
+          <th>
+            <span .visualmente-oculto>Ações
+      <tbody>
+        $forall Entity cid categoria <- categorias
+          <tr>
+            <td .titulo>#{categoriaNome categoria}
+            <td .secundario-texto>#{maybe "—" id (categoriaDescricao categoria)}
+            <td .acoes>
+              <a .acao href=@{CategoriaEditarR cid}>Editar
+              <form method=post action=@{CategoriaExcluirR cid} onsubmit="return confirm('Excluir esta categoria?')">
+                <button .acao .perigo>Excluir

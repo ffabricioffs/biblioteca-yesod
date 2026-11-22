@@ -65,6 +65,7 @@ getLeitoresR = do
 
 getLeitorR :: LeitorId -> Handler Html
 getLeitorR lid = do
+    dia <- hoje
     leitor <- runDB $ get404 lid
     emprestimos <- runDB $ selectList [EmprestimoLeitorId ==. lid] [Desc EmprestimoDataEmprestimo]
     historico <- forM emprestimos $ \(Entity _ e) -> do

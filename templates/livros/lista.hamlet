@@ -1,27 +1,42 @@
 <div .topo>
-  <h1>Livros
-  <a .botao href=@{LivroNovoR}>+ Novo livro
-<form .cartao method=get action=@{LivrosR}>
-  <input type=text name=busca value=#{busca} placeholder="Buscar por título">
-  <button type=submit>Buscar
+  <div>
+    <h1>Livros
+    <p .subtitulo>#{length itens} títulos no catálogo.
+  <a .botao href=@{LivroNovoR}>Cadastrar livro
+<form .busca method=get action=@{LivrosR} role="search">
+  <label .visualmente-oculto for="busca">Buscar por título
+  <input #busca type=text name=busca value=#{busca} placeholder="Buscar por título">
+  <button .botao .secundario type=submit>Buscar
 $if null itens
-  <p .vazio>Nenhum livro encontrado.
+  $if T.null busca
+    <p .vazio>Nenhum livro cadastrado ainda.
+  $else
+    <p .vazio>Nenhum título contém "#{busca}".
 $else
-  <table>
-    <tr>
-      <th>Título
-      <th>Editora
-      <th>Categoria
-      <th>Disponíveis
-      <th>Ações
-    $forall (lid, livro, editora, categoria, disponiveis) <- itens
-      <tr>
-        <td>
-          <a href=@{LivroR lid}>#{livroTitulo livro}
-        <td>#{editoraNome editora}
-        <td>#{categoriaNome categoria}
-        <td>#{disponiveis} de #{livroQuantidade livro}
-        <td .acoes>
-          <a .botao .pequeno href=@{LivroEditarR lid}>Editar
-          <form method=post action=@{LivroExcluirR lid} onsubmit="return confirm('Excluir este livro?')">
-            <button .perigo .pequeno>Excluir
+  <div .tabela>
+    <table>
+      <thead>
+        <tr>
+          <th>Título
+          <th>Editora
+          <th>Categoria
+          <th>Na estante
+          <th>
+            <span .visualmente-oculto>Ações
+      <tbody>
+        $forall (lid, livro, editora, categoria, disponiveis) <- itens
+          <tr>
+            <td .titulo>
+              <span .mini-lombada style="background-color: #{corLombada livro}">
+              <a href=@{LivroR lid}>#{livroTitulo livro}
+            <td>#{editoraNome editora}
+            <td>#{categoriaNome categoria}
+            <td>
+              $if disponiveis > 0
+                #{disponiveis} de #{livroQuantidade livro}
+              $else
+                <span .indisponivel>Todos emprestados
+            <td .acoes>
+              <a .acao href=@{LivroEditarR lid}>Editar
+              <form method=post action=@{LivroExcluirR lid} onsubmit="return confirm('Excluir este livro?')">
+                <button .acao .perigo>Excluir

@@ -26,6 +26,12 @@ instance Yesod App where
     -- Layout padrão de todas as páginas: menu, mensagens e CSS.
     defaultLayout widget = do
         mensagem <- getMessage
+        -- Seção atual (primeiro pedaço da URL, ex.: "livros"), usada
+        -- para destacar o item certo no menu lateral.
+        rotaAtual <- getCurrentRoute
+        let secao = case fmap (fst . renderRoute) rotaAtual of
+                Just (primeiro : _) -> primeiro
+                _                   -> ""
         pc <- widgetToPageContent $ do
             toWidget $(luciusFile "templates/layout.lucius")
             widget

@@ -1,37 +1,43 @@
 <div .topo>
-  <h1>Empréstimos
-  <a .botao href=@{EmprestimoNovoR}>+ Novo empréstimo
-<p .filtros>
-  Mostrar:
+  <div>
+    <h1>Empréstimos
+    <p .subtitulo>Saídas e devoluções de livros.
+  <a .botao href=@{EmprestimoNovoR}>Registrar empréstimo
+<nav .filtros aria-label="Filtrar empréstimos">
   <a :filtroAtivo situacao "todos":.ativo href=@{EmprestimosR}>Todos
   <a :filtroAtivo situacao "ativos":.ativo href=@?{(EmprestimosR, [("situacao", "ativos")])}>Em andamento
   <a :filtroAtivo situacao "atrasados":.ativo href=@?{(EmprestimosR, [("situacao", "atrasados")])}>Atrasados
 $if null itens
-  <p .vazio>Nenhum empréstimo encontrado.
+  <p .vazio>Nenhum empréstimo nesta lista.
 $else
-  <table>
-    <tr>
-      <th>Livro
-      <th>Leitor
-      <th>Empréstimo
-      <th>Previsto
-      <th>Situação
-      <th>Ações
-    $forall (eid, e, livro, leitor) <- itens
-      $with (texto, classe) <- statusEmprestimo dia e
+  <div .tabela>
+    <table>
+      <thead>
         <tr>
-          <td>
-            <a href=@{LivroR (emprestimoLivroId e)}>#{livroTitulo livro}
-          <td>
-            <a href=@{LeitorR (emprestimoLeitorId e)}>#{leitorNome leitor}
-          <td>#{formatarData (emprestimoDataEmprestimo e)}
-          <td>#{formatarData (emprestimoDataPrevista e)}
-          <td>
-            <span .etiqueta class=#{classe}>#{texto}
-          <td .acoes>
-            $if emprestimoDataDevolucao e == Nothing
-              <form method=post action=@{EmprestimoDevolverR eid}>
-                <button .pequeno>Devolver
-            <a .botao .pequeno href=@{EmprestimoEditarR eid}>Editar
-            <form method=post action=@{EmprestimoExcluirR eid} onsubmit="return confirm('Excluir este empréstimo?')">
-              <button .perigo .pequeno>Excluir
+          <th>Livro
+          <th>Leitor
+          <th>Saiu em
+          <th>Volta até
+          <th>Situação
+          <th>
+            <span .visualmente-oculto>Ações
+      <tbody>
+        $forall (eid, e, livro, leitor) <- itens
+          $with (texto, classe) <- statusEmprestimo dia e
+            <tr>
+              <td .titulo>
+                <span .mini-lombada style="background-color: #{corLombada livro}">
+                <a href=@{LivroR (emprestimoLivroId e)}>#{livroTitulo livro}
+              <td>
+                <a href=@{LeitorR (emprestimoLeitorId e)}>#{leitorNome leitor}
+              <td>#{formatarData (emprestimoDataEmprestimo e)}
+              <td>#{formatarData (emprestimoDataPrevista e)}
+              <td>
+                <span .carimbo class=#{classe}>#{texto}
+              <td .acoes>
+                $if emprestimoDataDevolucao e == Nothing
+                  <form method=post action=@{EmprestimoDevolverR eid}>
+                    <button .pequeno>Devolver
+                <a .acao href=@{EmprestimoEditarR eid}>Editar
+                <form method=post action=@{EmprestimoExcluirR eid} onsubmit="return confirm('Excluir este empréstimo?')">
+                  <button .acao .perigo>Excluir

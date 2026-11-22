@@ -1,19 +1,25 @@
 <div .topo>
-  <h1>Autores
-  <a .botao href=@{AutorNovoR}>+ Novo autor
+  <div>
+    <h1>Autores
+    <p .subtitulo>Quem escreveu os livros do acervo.
+  <a .botao href=@{AutorNovoR}>Cadastrar autor
 $if null autores
-  <p .vazio>Nenhum autor cadastrado.
+  <p .vazio>Nenhum autor cadastrado ainda.
 $else
-  <table>
-    <tr>
-      <th>Nome
-      <th>Nacionalidade
-      <th>Ações
-    $forall Entity aid autor <- autores
-      <tr>
-        <td>#{autorNome autor}
-        <td>#{maybe "—" id (autorNacionalidade autor)}
-        <td .acoes>
-          <a .botao .pequeno href=@{AutorEditarR aid}>Editar
-          <form method=post action=@{AutorExcluirR aid} onsubmit="return confirm('Excluir este autor?')">
-            <button .perigo .pequeno>Excluir
+  <div .tabela>
+    <table>
+      <thead>
+        <tr>
+          <th>Nome
+          <th>Nacionalidade
+          <th>
+            <span .visualmente-oculto>Ações
+      <tbody>
+        $forall Entity aid autor <- autores
+          <tr>
+            <td .titulo>#{autorNome autor}
+            <td .secundario-texto>#{maybe "—" id (autorNacionalidade autor)}
+            <td .acoes>
+              <a .acao href=@{AutorEditarR aid}>Editar
+              <form method=post action=@{AutorExcluirR aid} onsubmit="return confirm('Excluir este autor?')">
+                <button .acao .perigo>Excluir

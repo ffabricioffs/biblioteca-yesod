@@ -1,19 +1,25 @@
 <div .topo>
-  <h1>Editoras
-  <a .botao href=@{EditoraNovaR}>+ Nova editora
+  <div>
+    <h1>Editoras
+    <p .subtitulo>Casas editoriais dos livros do acervo.
+  <a .botao href=@{EditoraNovaR}>Cadastrar editora
 $if null editoras
-  <p .vazio>Nenhuma editora cadastrada.
+  <p .vazio>Nenhuma editora cadastrada ainda.
 $else
-  <table>
-    <tr>
-      <th>Nome
-      <th>Cidade
-      <th>Ações
-    $forall Entity eid editora <- editoras
-      <tr>
-        <td>#{editoraNome editora}
-        <td>#{maybe "—" id (editoraCidade editora)}
-        <td .acoes>
-          <a .botao .pequeno href=@{EditoraEditarR eid}>Editar
-          <form method=post action=@{EditoraExcluirR eid} onsubmit="return confirm('Excluir esta editora?')">
-            <button .perigo .pequeno>Excluir
+  <div .tabela>
+    <table>
+      <thead>
+        <tr>
+          <th>Nome
+          <th>Cidade
+          <th>
+            <span .visualmente-oculto>Ações
+      <tbody>
+        $forall Entity eid editora <- editoras
+          <tr>
+            <td .titulo>#{editoraNome editora}
+            <td .secundario-texto>#{maybe "—" id (editoraCidade editora)}
+            <td .acoes>
+              <a .acao href=@{EditoraEditarR eid}>Editar
+              <form method=post action=@{EditoraExcluirR eid} onsubmit="return confirm('Excluir esta editora?')">
+                <button .acao .perigo>Excluir

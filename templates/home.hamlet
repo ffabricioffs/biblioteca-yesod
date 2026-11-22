@@ -1,19 +1,62 @@
-<h1>Painel da biblioteca
-<div .painel>
-  <a .cartao href=@{LivrosR}>
-    <div .numero>#{qtdLivros}
-    Livros cadastrados
-  <a .cartao href=@{LeitoresR}>
-    <div .numero>#{qtdLeitores}
-    Leitores
-  <a .cartao href=@?{(EmprestimosR, [("situacao", "ativos")])}>
-    <div .numero>#{qtdAtivos}
-    Empréstimos em andamento
-  <a .cartao href=@?{(EmprestimosR, [("situacao", "atrasados")])}>
-    <div .numero>#{qtdAtrasados}
-    Empréstimos atrasados
-<div .cartao>
-  <h3>Ações rápidas
-  <a .botao href=@{EmprestimoNovoR}>Novo empréstimo
-  <a .botao href=@{LivroNovoR}>Novo livro
-  <a .botao href=@{LeitorNovoR}>Novo leitor
+<div .topo>
+  <div>
+    <h1>Hoje na biblioteca
+    <p .subtitulo>#{dataPorExtenso dia}. O acervo tem #{qtdLivros} títulos e #{qtdLeitores} leitores cadastrados.
+  <div .botoes>
+    <a .botao href=@{EmprestimoNovoR}>Registrar empréstimo
+    <a .botao .secundario href=@{LivroNovoR}>Cadastrar livro
+    <a .botao .secundario href=@{LeitorNovoR}>Cadastrar leitor
+
+<section .secao aria-labelledby="titulo-estante">
+  <div .secao-topo>
+    <h2 #titulo-estante>Na estante
+    <a href=@{LivrosR}>Ver o catálogo completo
+  <div .estante>
+    $if null livros
+      <p .estante-vazia>
+        A estante está vazia.
+        <br>
+        <a href=@{LivroNovoR}>Cadastre o primeiro livro
+    $forall Entity lid livro <- livros
+      <a .lombada href=@{LivroR lid} title=#{livroTitulo livro} style="background-color: #{corLombada livro}; height: #{alturaLombada livro}px; width: #{larguraLombada livro}px">
+        <span>#{livroTitulo livro}
+
+<section .secao aria-labelledby="titulo-circulacao">
+  <h2 #titulo-circulacao>Circulação
+  <ul .numeros>
+    <li>
+      <a href=@?{(EmprestimosR, [("situacao", "ativos")])}>
+        <strong>#{qtdAtivos}
+        <span>empréstimos em andamento
+    <li :temAtrasos:.alerta>
+      <a href=@?{(EmprestimosR, [("situacao", "atrasados")])}>
+        <strong>#{qtdAtrasados}
+        <span>com devolução atrasada
+
+<section .secao aria-labelledby="titulo-atrasos">
+  <h2 #titulo-atrasos>Devoluções atrasadas
+  $if null atrasados
+    <p .vazio>Nenhuma devolução atrasada. Todos os livros emprestados estão no prazo.
+  $else
+    <div .tabela>
+      <table>
+        <thead>
+          <tr>
+            <th>Livro
+            <th>Leitor
+            <th>Deveria voltar em
+            <th>
+              <span .visualmente-oculto>Ações
+        <tbody>
+          $forall (eid, e, livro, leitor) <- atrasados
+            <tr>
+              <td .titulo>
+                <span .mini-lombada style="background-color: #{corLombada livro}">
+                <a href=@{LivroR (emprestimoLivroId e)}>#{livroTitulo livro}
+              <td>
+                <a href=@{LeitorR (emprestimoLeitorId e)}>#{leitorNome leitor}
+              <td>
+                <span .carimbo .atrasado>#{formatarData (emprestimoDataPrevista e)}
+              <td .acoes>
+                <form method=post action=@{EmprestimoDevolverR eid}>
+                  <button .pequeno>Devolver

@@ -61,6 +61,7 @@ getLivrosR = do
 -- READ (detalhe): autores do livro e histórico de empréstimos.
 getLivroR :: LivroId -> Handler Html
 getLivroR lid = do
+    dia <- hoje
     livro     <- runDB $ get404 lid
     editora   <- runDB $ getJust (livroEditoraId livro)
     categoria <- runDB $ getJust (livroCategoriaId livro)
