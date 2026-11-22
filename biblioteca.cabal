@@ -22,6 +22,7 @@ executable biblioteca
         Handler.Categoria
         Handler.Comum
         Handler.Editora
+        Handler.Emprestimo
         Handler.Home
         Handler.Leitor
         Handler.Livro

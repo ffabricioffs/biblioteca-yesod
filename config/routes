@@ -36,3 +36,8 @@
 /leitores/#LeitorId/editar           LeitorEditarR      GET POST
 /leitores/#LeitorId/excluir          LeitorExcluirR     POST
 
+/emprestimos                         EmprestimosR       GET
+/emprestimos/novo                    EmprestimoNovoR    GET POST
+/emprestimos/#EmprestimoId/editar    EmprestimoEditarR  GET POST
+/emprestimos/#EmprestimoId/devolver  EmprestimoDevolverR POST
+/emprestimos/#EmprestimoId/excluir   EmprestimoExcluirR POST

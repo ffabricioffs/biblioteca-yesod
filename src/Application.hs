@@ -10,6 +10,7 @@ import Foundation
 import Handler.Autor
 import Handler.Categoria
 import Handler.Editora
+import Handler.Emprestimo
 import Handler.Home
 import Handler.Leitor
 import Handler.Livro
