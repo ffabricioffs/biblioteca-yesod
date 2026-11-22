@@ -2,6 +2,8 @@
 
 ## 1. Descrição
 
+**Aplicação online:** https://biblioteca-yesod.vercel.app
+
 Sistema web para gerenciar uma biblioteca: acervo de livros (com autores, editoras e categorias), cadastro de leitores e controle de empréstimos e devoluções.
 
 **Principais funcionalidades**
