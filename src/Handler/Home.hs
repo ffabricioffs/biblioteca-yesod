@@ -3,6 +3,7 @@
 module Handler.Home where
 
 import Control.Monad (forM)
+import Data.Text (Text)
 import Yesod
 
 import Foundation
@@ -28,6 +29,9 @@ getHomeR = do
         pure (eid, e, livro, leitor)
     let qtdAtrasados = length atrasados
         temAtrasos   = qtdAtrasados > 0
+        textoAndamento :: Text
+        textoAndamento = if qtdAtivos == 1 then "empréstimo em andamento"
+                                           else "empréstimos em andamento"
     defaultLayout $ do
         setTitle "Início"
         $(whamletFile "templates/home.hamlet")

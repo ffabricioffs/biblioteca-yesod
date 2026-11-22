@@ -1,7 +1,7 @@
 <div .topo>
   <div>
     <h1>Livros
-    <p .subtitulo>#{length itens} títulos no catálogo.
+    <p .subtitulo>#{contagem (length itens) "título" "títulos"} no catálogo.
   <a .botao href=@{LivroNovoR}>Cadastrar livro
 <form .busca method=get action=@{LivrosR} role="search">
   <label .visualmente-oculto for="busca">Buscar por título

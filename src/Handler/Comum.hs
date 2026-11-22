@@ -36,6 +36,10 @@ paginaFormulario titulo acao voltar formWidget enctype =
 formatarData :: Day -> String
 formatarData = formatTime defaultTimeLocale "%d/%m/%Y"
 
+-- | Número com a palavra no singular ou no plural: "1 título", "3 títulos".
+contagem :: Int -> Text -> Text -> Text
+contagem n singular plural = T.pack (show n) <> " " <> (if n == 1 then singular else plural)
+
 -- | Data por extenso em português, ex.: "Domingo, 22 de novembro de 2026".
 dataPorExtenso :: Day -> Text
 dataPorExtenso d = T.concat [semana, ", ", T.pack (show dia), " de ", mes, " de ", T.pack (show ano)]

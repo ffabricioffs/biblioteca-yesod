@@ -1,7 +1,7 @@
 <div .topo>
   <div>
     <h1>Hoje na biblioteca
-    <p .subtitulo>#{dataPorExtenso dia}. O acervo tem #{qtdLivros} títulos e #{qtdLeitores} leitores cadastrados.
+    <p .subtitulo>#{dataPorExtenso dia}. O acervo tem #{contagem qtdLivros "título" "títulos"} e #{contagem qtdLeitores "leitor cadastrado" "leitores cadastrados"}.
   <div .botoes>
     <a .botao href=@{EmprestimoNovoR}>Registrar empréstimo
     <a .botao .secundario href=@{LivroNovoR}>Cadastrar livro
@@ -27,7 +27,7 @@
     <li>
       <a href=@?{(EmprestimosR, [("situacao", "ativos")])}>
         <strong>#{qtdAtivos}
-        <span>empréstimos em andamento
+        <span>#{textoAndamento}
     <li :temAtrasos:.alerta>
       <a href=@?{(EmprestimosR, [("situacao", "atrasados")])}>
         <strong>#{qtdAtrasados}

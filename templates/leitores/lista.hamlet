@@ -1,7 +1,7 @@
 <div .topo>
   <div>
     <h1>Leitores
-    <p .subtitulo>#{length leitores} leitores cadastrados.
+    <p .subtitulo>#{contagem (length leitores) "leitor cadastrado" "leitores cadastrados"}.
   <a .botao href=@{LeitorNovoR}>Cadastrar leitor
 $if null leitores
   <p .vazio>Nenhum leitor cadastrado ainda.
