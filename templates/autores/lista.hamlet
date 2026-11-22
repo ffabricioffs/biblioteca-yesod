@@ -1,0 +1,19 @@
+<div .topo>
+  <h1>Autores
+  <a .botao href=@{AutorNovoR}>+ Novo autor
+$if null autores
+  <p .vazio>Nenhum autor cadastrado.
+$else
+  <table>
+    <tr>
+      <th>Nome
+      <th>Nacionalidade
+      <th>Ações
+    $forall Entity aid autor <- autores
+      <tr>
+        <td>#{autorNome autor}
+        <td>#{maybe "—" id (autorNacionalidade autor)}
+        <td .acoes>
+          <a .botao .pequeno href=@{AutorEditarR aid}>Editar
+          <form method=post action=@{AutorExcluirR aid} onsubmit="return confirm('Excluir este autor?')">
+            <button .perigo .pequeno>Excluir

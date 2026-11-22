@@ -19,3 +19,8 @@
 /editoras/#EditoraId/editar          EditoraEditarR     GET POST
 /editoras/#EditoraId/excluir         EditoraExcluirR    POST
 
+/autores                             AutoresR           GET
+/autores/novo                        AutorNovoR         GET POST
+/autores/#AutorId/editar             AutorEditarR       GET POST
+/autores/#AutorId/excluir            AutorExcluirR      POST
+

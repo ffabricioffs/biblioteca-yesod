@@ -17,6 +17,7 @@ executable biblioteca
     other-modules:
         Application
         Foundation
+        Handler.Autor
         Handler.Categoria
         Handler.Comum
         Handler.Editora

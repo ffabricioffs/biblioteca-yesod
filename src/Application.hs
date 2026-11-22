@@ -7,6 +7,7 @@ module Application where
 import Yesod
 
 import Foundation
+import Handler.Autor
 import Handler.Categoria
 import Handler.Editora
 import Handler.Home

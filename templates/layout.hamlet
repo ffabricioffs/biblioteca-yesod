@@ -9,6 +9,7 @@ $doctype 5
     <header>
       <a .marca href=@{HomeR}>📚 Biblioteca
       <nav>
+        <a href=@{AutoresR}>Autores
         <a href=@{EditorasR}>Editoras
         <a href=@{CategoriasR}>Categorias
     <main>
