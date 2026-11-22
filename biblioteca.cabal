@@ -22,6 +22,7 @@ executable biblioteca
         Handler.Comum
         Handler.Editora
         Handler.Home
+        Handler.Livro
         Models
     build-depends:
         base                 >= 4.16 && < 5

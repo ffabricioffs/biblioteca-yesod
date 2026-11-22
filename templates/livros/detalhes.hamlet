@@ -1,0 +1,38 @@
+<div .topo>
+  <h1>#{livroTitulo livro}
+  <div .acoes>
+    <a .botao href=@{LivroEditarR lid}>Editar
+    <form method=post action=@{LivroExcluirR lid} onsubmit="return confirm('Excluir este livro?')">
+      <button .perigo>Excluir
+<div .cartao>
+  <dl>
+    <dt>Autores
+    <dd>#{T.intercalate ", " (map autorNome autores)}
+    <dt>Editora
+    <dd>#{editoraNome editora}
+    <dt>Categoria
+    <dd>#{categoriaNome categoria}
+    <dt>ISBN
+    <dd>#{maybe "—" id (livroIsbn livro)}
+    <dt>Ano
+    <dd>#{maybe "—" show (livroAnoPublicacao livro)}
+    <dt>Exemplares
+    <dd>#{disponiveis} disponíveis de #{livroQuantidade livro}
+<h2>Histórico de empréstimos
+$if null historico
+  <p .vazio>Este livro ainda não foi emprestado.
+$else
+  <table>
+    <tr>
+      <th>Leitor
+      <th>Empréstimo
+      <th>Previsto
+      <th>Devolução
+    $forall (e, leitor) <- historico
+      <tr>
+        <td>#{leitorNome leitor}
+        <td>#{formatarData (emprestimoDataEmprestimo e)}
+        <td>#{formatarData (emprestimoDataPrevista e)}
+        <td>#{maybe "—" formatarData (emprestimoDataDevolucao e)}
+<p>
+  <a href=@{LivrosR}>← Voltar para livros

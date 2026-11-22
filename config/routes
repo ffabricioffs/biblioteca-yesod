@@ -24,3 +24,9 @@
 /autores/#AutorId/editar             AutorEditarR       GET POST
 /autores/#AutorId/excluir            AutorExcluirR      POST
 
+/livros                              LivrosR            GET
+/livros/novo                         LivroNovoR         GET POST
+/livros/#LivroId/detalhes            LivroR             GET
+/livros/#LivroId/editar              LivroEditarR       GET POST
+/livros/#LivroId/excluir             LivroExcluirR      POST
+

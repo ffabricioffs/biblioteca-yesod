@@ -1,0 +1,27 @@
+<div .topo>
+  <h1>Livros
+  <a .botao href=@{LivroNovoR}>+ Novo livro
+<form .cartao method=get action=@{LivrosR}>
+  <input type=text name=busca value=#{busca} placeholder="Buscar por título">
+  <button type=submit>Buscar
+$if null itens
+  <p .vazio>Nenhum livro encontrado.
+$else
+  <table>
+    <tr>
+      <th>Título
+      <th>Editora
+      <th>Categoria
+      <th>Disponíveis
+      <th>Ações
+    $forall (lid, livro, editora, categoria, disponiveis) <- itens
+      <tr>
+        <td>
+          <a href=@{LivroR lid}>#{livroTitulo livro}
+        <td>#{editoraNome editora}
+        <td>#{categoriaNome categoria}
+        <td>#{disponiveis} de #{livroQuantidade livro}
+        <td .acoes>
+          <a .botao .pequeno href=@{LivroEditarR lid}>Editar
+          <form method=post action=@{LivroExcluirR lid} onsubmit="return confirm('Excluir este livro?')">
+            <button .perigo .pequeno>Excluir
