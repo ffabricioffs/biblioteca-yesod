@@ -1,0 +1,19 @@
+<h1>Painel da biblioteca
+<div .painel>
+  <a .cartao href=@{LivrosR}>
+    <div .numero>#{qtdLivros}
+    Livros cadastrados
+  <a .cartao href=@{LeitoresR}>
+    <div .numero>#{qtdLeitores}
+    Leitores
+  <a .cartao href=@?{(EmprestimosR, [("situacao", "ativos")])}>
+    <div .numero>#{qtdAtivos}
+    Empréstimos em andamento
+  <a .cartao href=@?{(EmprestimosR, [("situacao", "atrasados")])}>
+    <div .numero>#{qtdAtrasados}
+    Empréstimos atrasados
+<div .cartao>
+  <h3>Ações rápidas
+  <a .botao href=@{EmprestimoNovoR}>Novo empréstimo
+  <a .botao href=@{LivroNovoR}>Novo livro
+  <a .botao href=@{LeitorNovoR}>Novo leitor
