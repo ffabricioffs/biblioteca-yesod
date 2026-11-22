@@ -11,6 +11,7 @@ import Handler.Autor
 import Handler.Categoria
 import Handler.Editora
 import Handler.Home
+import Handler.Leitor
 import Handler.Livro
 
 mkYesodDispatch "App" resourcesApp

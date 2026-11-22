@@ -30,3 +30,9 @@
 /livros/#LivroId/editar              LivroEditarR       GET POST
 /livros/#LivroId/excluir             LivroExcluirR      POST
 
+/leitores                            LeitoresR          GET
+/leitores/novo                       LeitorNovoR        GET POST
+/leitores/#LeitorId/detalhes         LeitorR            GET
+/leitores/#LeitorId/editar           LeitorEditarR      GET POST
+/leitores/#LeitorId/excluir          LeitorExcluirR     POST
+

@@ -13,6 +13,7 @@ $doctype 5
         <a href=@{AutoresR}>Autores
         <a href=@{EditorasR}>Editoras
         <a href=@{CategoriasR}>Categorias
+        <a href=@{LeitoresR}>Leitores
     <main>
       $maybe msg <- mensagem
         #{msg}

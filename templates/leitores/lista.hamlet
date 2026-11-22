@@ -1,0 +1,22 @@
+<div .topo>
+  <h1>Leitores
+  <a .botao href=@{LeitorNovoR}>+ Novo leitor
+$if null leitores
+  <p .vazio>Nenhum leitor cadastrado.
+$else
+  <table>
+    <tr>
+      <th>Nome
+      <th>E-mail
+      <th>Cidade/UF
+      <th>Ações
+    $forall Entity lid leitor <- leitores
+      <tr>
+        <td>
+          <a href=@{LeitorR lid}>#{leitorNome leitor}
+        <td>#{leitorEmail leitor}
+        <td>#{leitorCidade leitor}/#{leitorUf leitor}
+        <td .acoes>
+          <a .botao .pequeno href=@{LeitorEditarR lid}>Editar
+          <form method=post action=@{LeitorExcluirR lid} onsubmit="return confirm('Excluir este leitor?')">
+            <button .perigo .pequeno>Excluir
