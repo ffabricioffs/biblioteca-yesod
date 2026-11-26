@@ -6,8 +6,8 @@ services:
       POSTGRES_USER: biblio
       POSTGRES_PASSWORD: biblio
       POSTGRES_DB: biblioteca
-    ports:
-      - "5432:5432"
+    # Sem "ports": o banco só é acessível pelo app, dentro do Docker.
+    # Assim não conflita com um PostgreSQL já instalado no computador.
     volumes:
       - dados:/var/lib/postgresql/data
     healthcheck:

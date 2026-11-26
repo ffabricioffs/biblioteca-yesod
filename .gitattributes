@@ -1,0 +1,3 @@
+# Mantém as quebras de linha no formato Linux (LF) mesmo no Windows,
+# porque o projeto é compilado dentro de um container Linux.
+* text=auto eol=lf
